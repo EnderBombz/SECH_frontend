@@ -29,7 +29,6 @@ export default function TransitionsModal(props) {
   function deletePendencyItemList(){
     setLoading(true);
     let i=0;
-    let item = false;
     for(i=0;i<list.length;i++){
         if(list[i]._id === props.data._id){
           list.splice(i,1)

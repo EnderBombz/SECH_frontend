@@ -62,7 +62,7 @@ export default function VirtualizedList() {
   const [window, setWindow] = useState();
 
   async function GetItens() {
-    const data = await api.get("/werehouse/getComputers").then((response) => {
+    const data = await api.get("/werehouse/getFreeComputers").then((response) => {
       return response.data;
     });
     setComputerList(data);
@@ -75,7 +75,7 @@ export default function VirtualizedList() {
   function handleList() {
     setWindow(
       computerList.map((item, index) => (
-        <ListItem button onClick={() => { handleOpen(item) }}>
+       <ListItem button onClick={() => { handleOpen(item) }}>
           <ListItemText primary={`${item.equip_class} - ${index + 1}`} />
         </ListItem>
       ))
@@ -90,14 +90,6 @@ export default function VirtualizedList() {
     <>
       <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData} />
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}</div>
-      <Button
-        onClick={() => { console.log(list) }}
-        variant="contained"
-        color="primary"
-        fullWidth
-      >
-        Teste
-      </Button>
     </>
 
   );

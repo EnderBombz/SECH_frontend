@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { FixedSizeList } from "react-window";
 import api from "../../service/api";
 import Modal from "../Modals/ModalSpecs"
 
@@ -62,7 +61,7 @@ export default function VirtualizedList() {
   const [window, setWindow] = useState();
 
   async function GetItens() {
-    const data = await api.get("/werehouse/getPeripheals").then((response) => {
+    const data = await api.get("/werehouse/getFreePeripheals").then((response) => {
       return response.data;
     });
     setPeriphealsList(data);
