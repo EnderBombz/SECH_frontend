@@ -1,0 +1,22 @@
+.customGraphTab {
+    flex-grow: 1;
+    border-radius: 500px;
+    background-color: rgba(255, 255, 255, 0);
+    border: 3px solid #01463f;
+    margin: 15px 5% 15px 2%;
+    color: #fff;
+    position: relative;
+}
+
+.contentTab1 {
+    background-color: #00574F;
+    padding: 5px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.contentTab2 {
+    background-color: #ffffff;
+    border-radius: 0px 0px 8px 8px;
+    padding: 10px;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .3);
+}
