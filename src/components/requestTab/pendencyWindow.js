@@ -28,7 +28,7 @@ export default function VirtualizedList() {
 
   const sendRequest = async (data) =>{
     await Post(data);
-    history.push("/consultar-status")
+    history.push("/consultar-status") 
   }
 
   const handleOpen = async (data) => {
