@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext,useState} from "react";
 import { Link } from "react-router-dom";
 import history from './../history/history';
 
@@ -16,10 +16,21 @@ import {
 import "../css/login.css";
 import { Context } from "./../context/AuthContext";
 
+
 export default function Login(props) {
   const { authenticated, handleLogin } = useContext(Context);
 
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  
+  const handleEmail = (email) =>{
+    setEmail(email)
+  }
 
+  const handlePassword = (password) =>{
+    setPassword(password)
+  }
+  
   console.debug("Login", authenticated);
   return (
     <>
@@ -33,6 +44,7 @@ export default function Login(props) {
                   <TextField
                     type="email"
                     label="Email"
+                    onChange={(e)=>{handleEmail(e.target.value)}}
                     color={props.primary}
                     InputProps={{
                       startAdornment: (
@@ -46,6 +58,7 @@ export default function Login(props) {
                 <div className="box-text">
                 <TextField
                  type="password"
+                 onChange={(e)=>{handlePassword(e.target.value)}}
                  label="Senha"
                  color={props.primary}
                  InputProps={{
@@ -59,7 +72,7 @@ export default function Login(props) {
                 </div>
                 <div className="box-button">
 
-                  <Button onClick={handleLogin} variant="contained" fullWidth color="primary">Entrar</Button>
+                  <Button onClick={()=>{handleLogin(email,password)}} variant="contained" fullWidth color="primary">Entrar</Button>
                   
                   <Link to="/recuperar-senha"><h6>Esqueceu a senha?</h6></Link>
                 </div>

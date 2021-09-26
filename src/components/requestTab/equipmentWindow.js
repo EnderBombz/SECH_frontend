@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {ListItem,Button,ListItemText} from "@material-ui/core";
-import { FixedSizeList } from "react-window";
+import {ListItem,ListItemText} from "@material-ui/core";
 import api from "../../service/api";
 import Modal from "../Modals/ModalSpecs"
-import {Context} from "../../context/ListContext"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VirtualizedList() {
   const [loading, setLoading] = useState(true);
-  const {list} = useContext(Context)
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = async (data) => {
@@ -43,17 +39,7 @@ export default function VirtualizedList() {
     setOpen(false);
   };
 
-  function renderRow(props) {
-    // const { data, index, style } = props;
-    return (
-      <></>
-    );
-  }
 
-  renderRow.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired
-  };
 
   const classes = useStyles();
 

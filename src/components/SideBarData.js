@@ -3,6 +3,12 @@ import * as MaterialUI from '@material-ui/icons'
 
 export const SideBarData = [
     {
+        title:'user',
+        path:'/perfil',
+        icon:<MaterialUI.AccountCircle style={{marginRight:10}}/>,
+        className:'nav-text'
+    },
+    {
         title:'Abrir Chamado',
         path:'/chamado',
         icon:<MaterialUI.Add style={{marginRight:10}}/>,

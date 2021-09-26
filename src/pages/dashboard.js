@@ -4,13 +4,12 @@ import GraphTab from "../components/GraphTab"
 
 import "../css/dashboard.css"
 
-function dashboard() {
+export default function dashboard() {
 
     return (
         <>
 
             <NavBar />
-
             <div className="box-content">
                 <div className="content">
 
@@ -22,5 +21,3 @@ function dashboard() {
         </>
     )
 }
-
-export default dashboard

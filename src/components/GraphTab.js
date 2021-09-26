@@ -10,7 +10,6 @@ import ComputersChart from "./../components/charts/computers"
 export default function CenteredTabs() {
 
     const [tab, setTab] = React.useState(0);
-
     const handleChange = (event, newTab) => {
         console.log(newTab);
         setTab(newTab);
@@ -18,7 +17,6 @@ export default function CenteredTabs() {
 
     return (
         <>
-
             <Paper style={{ borderRadius: 50 }} >
                 <Tabs
                     value={tab}

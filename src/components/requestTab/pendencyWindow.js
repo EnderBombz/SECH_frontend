@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {ListItem, ListItemText ,Button} from "@material-ui/core"
-import api from "../../service/api";
 import Modal from "../Modals/ModalEdit"
 import {Context} from "../../context/ListContext"
 import {Post} from "../../functions/CRUD/EquipmentRequest"

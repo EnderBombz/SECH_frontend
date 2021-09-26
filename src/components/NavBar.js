@@ -1,12 +1,14 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {Link} from 'react-router-dom';
 import {SideBarData} from './SideBarData'
 import '../css/NavBar.css';
 import TopBar from "../components/Topbar"
+import {Context} from "../context/AuthContext"
 
 function NavBar(){
     const [sideBar,setSideBar]=useState(false)
     const ShowSideBar=()=>setSideBar(!sideBar)
+    const {userData} = useContext(Context)
 
     return(
         <>
@@ -30,10 +32,14 @@ function NavBar(){
                 SideBarData.map((item, index) => {
                     return (
                         <li key={index} className={item.className}>
-                            <Link to={item.path}>
+                            {item.title==="user"?<Link to={item.path}>
+                                {item.icon}
+                                <span>{userData.username}</span>
+                            </Link>: <Link to={item.path}>
                                 {item.icon}
                                 <span>{item.title}</span>
-                            </Link>
+                            </Link>}
+                           
                         </li>
                     );
                 })
