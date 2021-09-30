@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar } from '@material-ui/core'
+import { Avatar, Menu, MenuItem } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,17 +16,30 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  
   title: {
     flexGrow: 1,
   },
 }));
 
-const handleMain = () =>{
+const handleMain = () => {
   history.push("/dashboard")
 }
 
+
 export default function ButtonAppBar(props) {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -36,23 +49,22 @@ export default function ButtonAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <div style={{padding:3}}>
+            <div style={{ padding: 3 }}>
               <Button
                 variant="contained"
-                style={{borderRadius:50,fontWeight:"bolder"}}
+                style={{ borderRadius: 50, fontWeight: "bolder" }}
                 color="secondary"
                 size="large"
                 className={classes.button}
-                startIcon={<Avatar style={{height:20,width:20,padding:0,margin:0}} src={"https://i.imgur.com/gLOpjyV.png"} />}
-                onClick={()=>{handleMain()}}
+                startIcon={<Avatar style={{ height: 20, width: 20, padding: 0, margin: 0 }} src={"https://i.imgur.com/gLOpjyV.png"} />}
+                onClick={() => { handleMain() }}
               >
                 Gráfico S.E.C.H
               </Button>
             </div>
-
-
           </Typography>
-          
+
+
         </Toolbar>
       </AppBar>
     </div>

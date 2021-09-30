@@ -1,9 +1,10 @@
 import React from 'react'
 import * as MaterialUI from '@material-ui/icons'
 
+
 export const SideBarData = [
     {
-        title:'user',
+        title:'Perfil data do usuario',
         path:'/perfil',
         icon:<MaterialUI.AccountCircle style={{marginRight:10}}/>,
         className:'nav-text'
@@ -26,11 +27,5 @@ export const SideBarData = [
         icon:<MaterialUI.Settings style={{marginTop:0}}/>,
         className:'nav-text'
     },
-    {
-        title:'Cadastros (Temporário)',
-        path:'/cadastros',
-        icon:<MaterialUI.Settings style={{marginTop:0}}/>,
-        className:'nav-text'
-    },
-    
+  
 ]

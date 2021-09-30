@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
-import RequestTab from "../components/users/requestTab"
+import RequestTab from "../components/werehouse/requestTab"
 
 import "../css/textAlign.css"
 
@@ -14,8 +14,8 @@ function Status() {
 
             <div className="box-content">
                 <div className="content">
-                    <h1 className="textAlign-left">Usuários</h1>
-                    <p className="textAlign-left">Nesta área, é possivel gerenciar o acesso</p>
+                    <h1 className="textAlign-left">Solicitações</h1>
+                    <p className="textAlign-left">Com o acesso técnico, é possível liberar ou negar as solicitações dos usuários</p>
                     <RequestTab />
                 </div>
             </div>

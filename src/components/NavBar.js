@@ -9,6 +9,7 @@ function NavBar(){
     const [sideBar,setSideBar]=useState(false)
     const ShowSideBar=()=>setSideBar(!sideBar)
     const {userData} = useContext(Context)
+    SideBarData[0].title = userData.username;
 
     return(
         <>
@@ -32,13 +33,10 @@ function NavBar(){
                 SideBarData.map((item, index) => {
                     return (
                         <li key={index} className={item.className}>
-                            {item.title==="user"?<Link to={item.path}>
-                                {item.icon}
-                                <span>{userData.username}</span>
-                            </Link>: <Link to={item.path}>
+                            <Link to={item.path}>
                                 {item.icon}
                                 <span>{item.title}</span>
-                            </Link>}
+                            </Link>
                            
                         </li>
                     );

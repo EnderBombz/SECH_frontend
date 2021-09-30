@@ -7,10 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import ComputerList from "./equipmentWindow"
-import PeriphealList from "./periphealWindow"
-import PendencyList from "./pendencyWindow"
-
 
 function TabPanel(props) {
     
@@ -70,22 +66,18 @@ export default function TabsWrappedLabel() {
                 <Tabs value={value} onChange={handleChange} style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }} aria-label="wrapped label tabs example" >
                     <Tab
                         value="one"
-                        label="Computadores"
-                        wrapped 
+                        label="Equipamentos"
+                        wrapped     
                         {...a11yProps('one')}
                     />
                     <Tab value="two" label="Periféricos" {...a11yProps('two')} />
-                    <Tab value="three" label="Pendentes" {...a11yProps('three')} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index="one">
-                <ComputerList/>
+                <h1>Equipamentos</h1>
             </TabPanel>
             <TabPanel value={value} index="two">
-                <PeriphealList/>
-            </TabPanel>
-            <TabPanel value={value} index="three">
-                <PendencyList/>
+            <h1>Periféricos</h1>
             </TabPanel>
         </div>
     );
