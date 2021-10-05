@@ -2,7 +2,7 @@ import React, { createContext} from 'react';
 
 import useList from './../hooks/useList'
 
-const Context = createContext();
+const ListContext = createContext();
 
 function ListProvider({ children }) {
 
@@ -11,12 +11,12 @@ function ListProvider({ children }) {
     } = useList()
 
     return ( 
-        <Context.Provider value={{list, pushList, clearList,updateList,setList,loading, setLoading}}> 
+        <ListContext.Provider value={{list, pushList, clearList,updateList,setList,loading, setLoading}}> 
             { children } 
-        </Context.Provider>
+        </ListContext.Provider>
     )
 
 
 }
 
-export {Context, ListProvider};
+export {ListContext, ListProvider};

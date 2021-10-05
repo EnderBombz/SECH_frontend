@@ -4,8 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import "./../../css/modal.css";
-import {ListContext} from "../../context/ListContext"
+import "./../../../css/modal.css";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,23 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
 
-  const {list,setLoading} = useContext(ListContext);
-
-  function deletePendencyItemList(){
-    setLoading(true);
-    let i=0;
-    for(i=0;i<list.length;i++){
-        if(list[i]._id === props.data._id){
-          list.splice(i,1)
-          window.alert(`${props.data._id} foi removido da lista`)
-          props.handleClose();
-         
-        }
-    }
-       
-  }
-
-
   return (
     <div>
       <Modal
@@ -57,18 +39,13 @@ export default function TransitionsModal(props) {
       >
         <Fade in={props.open}>
           <div className={classes.paper}>
-            {props.data ? (
+            {props.question? (
               <>
-                <h3>
-                  {props.data.equip_type} ID:{props.data._id}
-                </h3>
-                <h4>Especificações</h4>
-                <p>{props.data.equip_spec}</p>
-                <h4>Detalhes</h4>
-                <p> {props.data.equip_details}</p>
+               
+                <p>{props.question}</p>
                 <div>
-                  <Button
-                  onClick={()=>{deletePendencyItemList()}}
+                <Button
+                  onClick={()=>{}}
                     variant="contained"
                     color="primary"
                     style={{
@@ -78,7 +55,7 @@ export default function TransitionsModal(props) {
                       fontSize: "15px"
                     }}
                   >
-                    Deletar
+                    Sim
                   </Button>
                   <Button
                     onClick={() => {
@@ -92,7 +69,7 @@ export default function TransitionsModal(props) {
                       padding: "10px 30px 10px 30px"
                     }}
                   >
-                    Cancelar
+                    Não
                   </Button>
                 </div>
               </>

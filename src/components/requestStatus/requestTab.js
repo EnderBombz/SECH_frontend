@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import StatusList from "./../../components/statusData/statusList"
 
 
 function TabPanel(props) {
@@ -74,7 +75,7 @@ export default function TabsWrappedLabel() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index="one">
-                <h1>Ativo</h1>
+                <StatusList/>
             </TabPanel>
             <TabPanel value={value} index="two">
             <h1>Histórico</h1>

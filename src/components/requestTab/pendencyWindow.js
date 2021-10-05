@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {ListItem, ListItemText ,Button} from "@material-ui/core"
 import Modal from "../Modals/ModalEdit"
-import {Context} from "../../context/ListContext"
+import {ListContext} from "../../context/ListContext"
+import {Context} from "../../context/AuthContext"
 import {Post} from "../../functions/CRUD/EquipmentRequest"
 import history from "./../../history/history"
 
@@ -20,13 +21,14 @@ const useStyles = makeStyles((theme) => ({
 export default function VirtualizedList() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = React.useState(false);
-  const {list} = useContext(Context) 
+  const {list} = useContext(ListContext) 
+  const {userData} = useContext(Context) 
   const classes = useStyles();
   const [currentData, setCurrentData] = useState([]);
   const [window, setWindow] = useState();
 
   const sendRequest = async (data) =>{
-    await Post(data);
+    await Post(data,userData._id);
     history.push("/consultar-status") 
   }
 
@@ -81,7 +83,7 @@ export default function VirtualizedList() {
     
       </div>
         <Button
-                  onClick={()=>{sendRequest(list)}}
+                  onClick={()=>{sendRequest(list,)}}
                     variant="contained"
                     color="primary"
                     fullWidth

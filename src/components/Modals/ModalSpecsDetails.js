@@ -5,7 +5,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import "./../../css/modal.css";
-import {ListContext} from "../../context/ListContext"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -23,22 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
-
-  const {list,setLoading} = useContext(ListContext);
-
-  function deletePendencyItemList(){
-    setLoading(true);
-    let i=0;
-    for(i=0;i<list.length;i++){
-        if(list[i]._id === props.data._id){
-          list.splice(i,1)
-          window.alert(`${props.data._id} foi removido da lista`)
-          props.handleClose();
-         
-        }
-    }
-       
-  }
 
 
   return (
@@ -68,7 +51,7 @@ export default function TransitionsModal(props) {
                 <p> {props.data.equip_details}</p>
                 <div>
                   <Button
-                  onClick={()=>{deletePendencyItemList()}}
+                  onClick={()=>{}}
                     variant="contained"
                     color="primary"
                     style={{
@@ -78,7 +61,7 @@ export default function TransitionsModal(props) {
                       fontSize: "15px"
                     }}
                   >
-                    Deletar
+                    Adicionar
                   </Button>
                   <Button
                     onClick={() => {

@@ -11,14 +11,14 @@ function dataAtualFormatada() {
 }
 
 
-async function Post(data) {
+async function Post(data, user_id) {
 
     const date = dataAtualFormatada();
     const list = JSON.stringify(data);
 
     await api.post("/equipment-requests/post", {
         equip_list: list,
-        user_id: "id do usuário",
+        user_id: user_id,
         request_date: date.toString(),
     }).then((response) => {
         alert("Sucesso ao enviar os dados")

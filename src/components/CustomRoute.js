@@ -13,5 +13,6 @@ export default function CustomRoute({isPrivate, ...rest}){
         return <Redirect to="/login"/>
     }
 
+
     return <Route {...rest}/>;
 }

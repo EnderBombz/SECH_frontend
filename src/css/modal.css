@@ -36,5 +36,15 @@
     bottom: 0px;
 }
 
+.flex-itens {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 60px;
+}
+
+.flex-itens Button {
+    margin: 2px
+}
+
 
 /* --------- React Modal ------------*/

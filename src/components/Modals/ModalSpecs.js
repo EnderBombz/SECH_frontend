@@ -5,7 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import "./../../css/modal.css";
-import {Context} from "../../context/ListContext"
+import {ListContext} from "../../context/ListContext"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
 
-  const {pushList,list} = useContext(Context);
+  const {pushList,list} = useContext(ListContext);
 
   function pushPendencyList(){
 
