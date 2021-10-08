@@ -37,7 +37,7 @@ export default function TransitionsModal(props) {
          
         }
     }
-       
+    props.updatePendency();
   }
 
 
@@ -78,7 +78,7 @@ export default function TransitionsModal(props) {
                       fontSize: "15px"
                     }}
                   >
-                    Deletar
+                    Remover
                   </Button>
                   <Button
                     onClick={() => {

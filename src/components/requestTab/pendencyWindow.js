@@ -28,8 +28,15 @@ export default function VirtualizedList() {
   const [window, setWindow] = useState();
 
   const sendRequest = async (data) =>{
-    await Post(data,userData._id);
+
+    if(data.length > 0){
+        await Post(data,userData._id);
     history.push("/consultar-status") 
+    }else{
+      alert("É necessário selecionar no mínimo um item para solicitação");
+    }
+
+  
   }
 
   const handleOpen = async (data) => {
@@ -72,18 +79,24 @@ export default function VirtualizedList() {
     );
   }
 
+  function updatePendency(){
+    setLoading(true);
+    handleList();
+  }
+
+
   useEffect(() => {
     GetItens();
   }, [loading]);
 
   return (
     <>
-      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData}/>
+      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData} updatePendency={updatePendency}/>
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}
     
       </div>
         <Button
-                  onClick={()=>{sendRequest(list,)}}
+                  onClick={()=>{sendRequest(list)}}
                     variant="contained"
                     color="primary"
                     fullWidth

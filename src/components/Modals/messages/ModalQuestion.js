@@ -45,7 +45,7 @@ export default function TransitionsModal(props) {
                 <p>{props.question}</p>
                 <div>
                 <Button
-                  onClick={()=>{}}
+                  onClick={()=>{props.action()}}
                     variant="contained"
                     color="primary"
                     style={{
