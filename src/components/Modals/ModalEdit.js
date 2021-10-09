@@ -68,7 +68,7 @@ export default function TransitionsModal(props) {
                 <p> {props.data.equip_details}</p>
                 <div>
                   <Button
-                  onClick={()=>{deletePendencyItemList()}}
+                  onClick={()=>{props.handleOpenQuestion(props.data)}}
                     variant="contained"
                     color="primary"
                     style={{

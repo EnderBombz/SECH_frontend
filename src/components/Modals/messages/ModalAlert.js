@@ -4,8 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import "./../../css/modal.css";
-
+import "./../../../css/modal.css"
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -39,27 +38,25 @@ export default function TransitionsModal(props) {
       >
         <Fade in={props.open}>
           <div className={classes.paper}>
-            {props.data ? (
+            {props.alert? (
               <>
-                <h3>
-                  {props.alert}
-                </h3>
-                <p>{props.description}</p>
                
+                <p>{props.alert}</p>
                 <div>
-                 
-                  <Button
-                    onClick={() => {
-                      props.handleClose();
-                    }}
+                <Button
+                  onClick={()=>{props.handleClose()}}
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     style={{
-                      width:200,
+                      textAlign: "left",
+                      margin: "10px",
+                      padding: "10px 30px 10px 30px",
+                      fontSize: "15px"
                     }}
                   >
-                    OK
+                    ok
                   </Button>
+                 
                 </div>
               </>
             ) : (

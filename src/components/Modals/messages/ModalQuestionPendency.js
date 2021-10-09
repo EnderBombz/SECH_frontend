@@ -5,6 +5,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import "./../../../css/modal.css";
+import {ListContext} from "./../../../context/ListContext"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -23,6 +24,22 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
 
+  const {list,setLoading} = useContext(ListContext)
+
+  function deletePendencyItemList(){
+    console.log(props.data)
+    setLoading(true);
+    let i=0;
+    for(i=0;i<list.length;i++){
+        if(list[i]._id === props.data._id){
+          list.splice(i,1)
+          window.alert(`${props.data._id} foi removido da lista`)
+          props.handleCloseQuestion();  
+          props.handleClose(); 
+        }
+    }
+    props.updatePendency();
+  }
 
   return (
     <div>
@@ -31,7 +48,7 @@ export default function TransitionsModal(props) {
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={props.open}
-        onClose={props.handleClose}
+        onClose={props.handleCloseQuestion}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -46,7 +63,7 @@ export default function TransitionsModal(props) {
                 <p>{props.question}</p>
                 <div>
                 <Button
-                  onClick={()=>{props.action()}}
+                  onClick={()=>{deletePendencyItemList()}}
                     variant="contained"
                     color="primary"
                     style={{

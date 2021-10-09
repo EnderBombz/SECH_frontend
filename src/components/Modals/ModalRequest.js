@@ -45,6 +45,10 @@ export default function TransitionsModal(props) {
                                 <h3>
                                     Chamado: {props.data._id}
                                 </h3>
+                                <div><div className={props.data.request_status}>
+                                    <h4>Status: {props.data.request_status}</h4>
+                                </div></div>
+                                
                            <div className="flex-itens"> 
 
                                {props.data.equip_list?

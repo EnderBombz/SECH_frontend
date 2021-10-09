@@ -46,5 +46,13 @@
     margin: 2px
 }
 
+.pending {
+    background-color: rgba(255, 255, 70, 1);
+    margin: 40px;
+    border-radius: 15px;
+    padding: 1px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
 
 /* --------- React Modal ------------*/

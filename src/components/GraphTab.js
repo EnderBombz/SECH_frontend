@@ -11,7 +11,6 @@ export default function CenteredTabs() {
 
     const [tab, setTab] = React.useState(0);
     const handleChange = (event, newTab) => {
-        console.log(newTab);
         setTab(newTab);
     };
 

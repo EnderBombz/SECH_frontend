@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
 import GraphTab from "../components/GraphTab"
+import { DashboardProvider } from '../context/DashboardContext'
 
 import "../css/dashboard.css"
 
@@ -10,14 +11,17 @@ export default function dashboard() {
         <>
 
             <NavBar />
-            <div className="box-content">
-                <div className="content">
+            <DashboardProvider>
+                <div className="box-content">
+                    <div className="content">
 
-                    <GraphTab />
+                        <GraphTab />
 
-                    
+
+                    </div>
                 </div>
-            </div>
+            </DashboardProvider>
+
         </>
     )
 }
