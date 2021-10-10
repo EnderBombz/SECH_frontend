@@ -25,13 +25,14 @@ export default function ComputerChart() {
             let cont_maintance = 0;
             let cont_reserved = 0;
             let cont_free = 0;
+            const type =  "computer"
 
             itens.forEach(itens => {
-                if (itens.equip_state == "reservado") {
+                if (itens.equip_state == "reservado" && itens.equip_type === type) {
                     cont_reserved++;
-                } else if (itens.equip_state == "manutenção") {
+                } else if (itens.equip_state == "manutenção"&& itens.equip_type === type) {
                     cont_maintance++;
-                } else {
+                } else if(itens.equip_state == "livre"&& itens.equip_type === type){
                     cont_free++;
                 }
             })
@@ -47,7 +48,9 @@ export default function ComputerChart() {
         getIndexData()
     }, [loading])
 
-    return (<Doughnut
+    return (
+    <>
+    <Doughnut
         height={300}
         width={300}
 
@@ -79,5 +82,8 @@ export default function ComputerChart() {
 
             }
         }}
-    />)
+    />
+
+    </>
+    )
 }

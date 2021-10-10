@@ -5,6 +5,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import api from "../../service/api";
 import Modal from "../Modals/ModalSpecs"
+import ModalAlert from "../Modals/messages/ModalAlert"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +25,9 @@ export default function VirtualizedList() {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = async (data) => {
-    try {
-      console.log(data);
+    try { 
       let value = data;
-      console.log(value);
       setCurrentData(value);
-      console.log(currentData);
       setOpen(true);
 
     } catch (err) {
@@ -87,7 +86,7 @@ export default function VirtualizedList() {
 
   return (
     <>
-      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData} />
+      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData}/>
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}</div>
     </>
 

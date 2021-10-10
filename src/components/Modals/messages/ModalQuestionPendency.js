@@ -33,11 +33,14 @@ export default function TransitionsModal(props) {
     for(i=0;i<list.length;i++){
         if(list[i]._id === props.data._id){
           list.splice(i,1)
-          window.alert(`${props.data._id} foi removido da lista`)
+
+      
+          props.handleAlertMessage(`Item ${props.data._id} foi removido da lista de itens pendentes`)
           props.handleCloseQuestion();  
           props.handleClose(); 
         }
     }
+    props.handleOpenAlert();
     props.updatePendency();
   }
 

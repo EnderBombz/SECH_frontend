@@ -5,6 +5,7 @@ import {ListItem,ListItemText} from "@material-ui/core";
 import api from "../../service/api";
 import Modal from "../Modals/ModalRequest"
 import ModalCancel from "../Modals/messages/ModalQuestion"
+import ModalDetails from "../Modals/ModalSpecsDetails"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VirtualizedList() {
   const {userData} = useContext(Context)
+
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = React.useState(false);
+
   const [openDetails, setOpenDetails] = React.useState(false);
   const [openCancel, setOpenCancel] = React.useState(false);
 
@@ -52,11 +55,22 @@ export default function VirtualizedList() {
     setOpenCancel(false);
   };
 
+  const handleOpenDetails = (data) => {
+    setCurrentItem(data);
+    setOpenDetails(true);
+};
+
+const handleCloseDetails = () => {
+  setOpenDetails(false);
+};
+
 
   const classes = useStyles();
 
   const [statusList, setStatusList] = useState([]);
   const [currentData, setCurrentData] = useState([]);
+  const [currentItem, setCurrentItem] = useState()
+
   const [window, setWindow] = useState();
 
   async function RemoveRequest(){
@@ -101,8 +115,30 @@ export default function VirtualizedList() {
 
   return (
     <>
-      <ModalCancel handleOpen={handleOpenCancel} handleClose={handleCloseCancel} open={openCancel} question="Deseja realmente encerrar o chamado?" action={RemoveRequest} />
-      <Modal handleOpen={handleOpen} handleClose={handleClose} handleOpenCancel={handleOpenCancel} handleCloseCancel={handleCloseCancel}  open={open} data={currentData} />
+    <ModalDetails 
+     handleOpen={handleOpenDetails} 
+     handleClose={handleCloseDetails} 
+     open={openDetails} 
+    data={currentItem}
+    />
+      <ModalCancel 
+      handleOpen={handleOpenCancel} 
+      handleClose={handleCloseCancel} 
+      open={openCancel} 
+      question="Deseja realmente encerrar o chamado?" 
+      action={RemoveRequest} 
+      />
+      
+      <Modal 
+      handleOpen={handleOpen}
+       handleClose={handleClose} 
+       handleOpenCancel={handleOpenCancel} 
+       handleCloseCancel={handleCloseCancel}  
+       open={open} 
+       data={currentData} 
+       handleOpenDetails={handleOpenDetails}
+       />
+
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}</div>
     </>
 

@@ -50,32 +50,16 @@ export default function TransitionsModal(props) {
                 <h4>Detalhes</h4>
                 <p> {props.data.equip_details}</p>
                 <div>
-                  <Button
-                  onClick={()=>{}}
-                    variant="contained"
-                    color="primary"
-                    style={{
-                      textAlign: "left",
-                      margin: "10px",
-                      padding: "10px 30px 10px 30px",
-                      fontSize: "15px"
-                    }}
-                  >
-                    Adicionar
-                  </Button>
+                  
                   <Button
                     onClick={() => {
                       props.handleClose();
                     }}
                     variant="contained"
                     color="secondary"
-                    style={{
-                      textAlign: "right",
-                      margin: "10px",
-                      padding: "10px 30px 10px 30px"
-                    }}
+                    fullWidth
                   >
-                    Cancelar
+                   Fechar
                   </Button>
                 </div>
               </>

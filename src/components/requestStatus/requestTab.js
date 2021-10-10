@@ -71,15 +71,13 @@ export default function TabsWrappedLabel() {
                         wrapped     
                         {...a11yProps('one')}
                     />
-                    <Tab value="two" label="Histórico" {...a11yProps('two')} />
+                 
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index="one">
                 <StatusList/>
             </TabPanel>
-            <TabPanel value={value} index="two">
-            <h1>Histórico</h1>
-            </TabPanel>
+        
         </div>
     );
 }

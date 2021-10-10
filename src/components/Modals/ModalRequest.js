@@ -55,6 +55,7 @@ export default function TransitionsModal(props) {
                                <>
                                {props.data.equip_list.map((item, index) => (
                                         <Button  
+                                        onClick={()=>{props.handleOpenDetails(item)}}
                                         variant="contained"
                                         color="primary"
                                         >{item.equip_name}

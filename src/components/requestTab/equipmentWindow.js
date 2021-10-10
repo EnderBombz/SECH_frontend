@@ -19,13 +19,10 @@ export default function VirtualizedList() {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = async(data) => {
+    const handleOpen = async (data) => {
         try {
-            console.log(data);
             let value = data;
-            console.log(value);
             setCurrentData(value);
-            console.log(currentData);
             setOpen(true);
 
         } catch (err) {
@@ -60,13 +57,11 @@ export default function VirtualizedList() {
 
     function handleList() {
         setWindow(
-            computerList.map((item, index) => ( <
-                ListItem button onClick = {
-                    () => { handleOpen(item) } } >
-                <
-                ListItemText primary = { `${item.equip_class} - ${index + 1}` }
-                /> <
-                /ListItem>
+            computerList.map((item, index) => (
+                <ListItem button onClick={
+                    () => { handleOpen(item) }} >
+                    <ListItemText primary={`${item.equip_class} - ${index + 1}`} />
+                </ListItem>
             ))
         );
     }
@@ -75,18 +70,16 @@ export default function VirtualizedList() {
         GetItens();
     }, [loading]);
 
-    return ( <
-        >
-        <
-        Modal handleOpen = { handleOpen }
-        handleClose = { handleClose }
-        open = { open }
-        data = { currentData }
-        /> <
-        div className = { classes.root } > {
-            loading ? < h1 > Loading... < /h1> : window}</div >
-            <
+    return (
+        <>
+            <Modal handleOpen={handleOpen}
+                handleClose={handleClose}
+                open={open}
+                data={currentData}
             />
+            <div className={classes.root}> {loading ? <h1> Loading... </h1> : window}</div>
 
-        );
-    }
+        </>
+
+    );
+}

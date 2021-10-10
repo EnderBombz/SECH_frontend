@@ -38,30 +38,22 @@ export default function TransitionsModal(props) {
       >
         <Fade in={props.open}>
           <div className={classes.paper}>
-            {props.alert? (
               <>
                
                 <p>{props.alert}</p>
                 <div>
                 <Button
-                  onClick={()=>{props.handleClose()}}
+                  onClick={()=>{props.action()}}
                     variant="contained"
                     color="primary"
-                    style={{
-                      textAlign: "left",
-                      margin: "10px",
-                      padding: "10px 30px 10px 30px",
-                      fontSize: "15px"
-                    }}
+                    fullWidth
                   >
                     ok
                   </Button>
-                 
+      
                 </div>
               </>
-            ) : (
-              <></>
-            )}
+    
           </div>
         </Fade>
       </Modal>

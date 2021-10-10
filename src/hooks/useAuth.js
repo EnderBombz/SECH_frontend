@@ -7,7 +7,19 @@ export default function useAuth() {
 
     const [authenticated, setAuthenticated] = useState(false);
     const [userData, setUserData] = useState()
+    const [haveRequest, setHaveRequest] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    async function handleHaveRequest() {
+        const isRequest = await api.get(`/equipment-requests/have-request/${userData._id}`).then((response) => {
+            return response.data
+        })
+        if (isRequest) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     function parseJwt(token) {
         var base64Url = token.split('.')[1];
@@ -18,6 +30,8 @@ export default function useAuth() {
 
         return JSON.parse(jsonPayload);
     };
+
+
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -53,5 +67,5 @@ export default function useAuth() {
         history.push("/login")
     }
 
-    return { authenticated, loading, handleLogin, handleLogout, userData };
+    return { authenticated, loading, handleLogin, handleLogout, userData, haveRequest, handleHaveRequest };
 }

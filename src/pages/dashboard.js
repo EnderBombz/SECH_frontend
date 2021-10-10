@@ -16,9 +16,11 @@ export default function dashboard() {
                     <div className="content">
 
                         <GraphTab />
+                    <div className="spacing">
 
-
-                    </div>
+                 </div>
+                    </div>     
+                
                 </div>
             </DashboardProvider>
 

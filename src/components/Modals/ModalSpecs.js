@@ -37,7 +37,8 @@ export default function TransitionsModal(props) {
     }
 
     if(item){
-      window.alert(`já existe um ${props.data.equip_class} na lista`)
+      props.handleOpenAlert();
+      props.setAlertMessage(`já existe um ${props.data.equip_class} na lista`)
       props.handleClose();
     }else{
       pushList(props.data);

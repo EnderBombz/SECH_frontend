@@ -23,37 +23,53 @@ const useStyles = makeStyles((theme) => ({
 export default function VirtualizedList() {
   const [loading, setLoading] = useState(true);
   const { list } = useContext(ListContext)
-  const { userData } = useContext(Context)
+  const { userData,haveRequest,handleHaveRequest} = useContext(Context)
   const classes = useStyles();
   const [currentData, setCurrentData] = useState([]);
   const [window, setWindow] = useState();
 
   const [open, setOpen] = React.useState(false);
   const [openQuestion, setOpenQuestion] = React.useState(false);
-  const [openAlert, setOpenAlert] = React.useState(false);
 
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState("");
+  const [alertAction,setAlertAction] = React.useState();
+  
+  const [pushChamado,setPushChamado]= React.useState();
 
   const sendRequest = async (data) => {
-
     if (data.length > 0) {
-      await Post(data, userData._id);
-      history.push("/consultar-status")
+
+      const haveRequestStatus = await handleHaveRequest();
+      console.log(haveRequestStatus)
+      if(haveRequestStatus){
+        handleOpenAlert()
+        setAlertMessage("Você já possuí uma solicitação de equipamento pendente")
+        //setAlertAction(handleCloseAlert);
+      }else{
+        await Post(data, userData._id);
+      handleChamado();
+      }
     } else {
-      alert("É necessário selecionar no mínimo um item para solicitação");
+      handleOpenAlert()
+      setAlertMessage("É necessário selecionar no mínimo um item para solicitação")
     }
   }
 
- 
+
+  const handleChamado = ()=>{
+   history.push("/consultar-status")
+  }
+
+  const handleAlertMessage = (msg) => {
+    setAlertMessage(msg)
+  }
 
 
   const handleOpen = async (data) => {
     try {
-
-      console.log(data);
       let value = data;
-      console.log(value);
       setCurrentData(value);
-      console.log(currentData);
       setOpen(true);
 
     } catch (err) {
@@ -66,7 +82,7 @@ export default function VirtualizedList() {
     setCurrentData(null);
     setOpen(false);
   };
-  
+
   const handleOpenQuestion = async (data) => {
     try {
 
@@ -126,9 +142,26 @@ export default function VirtualizedList() {
 
   return (
     <>
-      <ModalAlert handleOpen={handleOpenAlert} handleClose={handleCloseAlert} alert={"Removido com sucesso!"}/>
-      <ModalQuestion handleOpen={handleOpenQuestion} handleClose={handleClose} handleCloseQuestion={handleCloseQuestion} open={openQuestion} question={"Deseja realmente remover o item da lista de pendentes?"} updatePendency={updatePendency} data={currentData}/>
-      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData} handleOpenQuestion={handleOpenQuestion}/>
+      <ModalAlert  
+      open={openAlert}  
+      handleOpen={handleOpenAlert} 
+      handleClose={handleCloseAlert} 
+      alert={alertMessage}
+      action={handleCloseAlert}
+      />
+
+      <ModalQuestion 
+      handleOpen={handleOpenQuestion} 
+      handleClose={handleClose} 
+      handleCloseQuestion={handleCloseQuestion} 
+      open={openQuestion} 
+      question={"Deseja realmente remover o item da lista de pendentes?"} 
+      updatePendency={updatePendency} 
+      data={currentData} 
+      handleOpenAlert={handleOpenAlert} handleAlertMessage={handleAlertMessage}
+      />
+
+      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData} handleOpenQuestion={handleOpenQuestion} />
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}
 
       </div>
