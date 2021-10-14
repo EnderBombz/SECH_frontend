@@ -103,7 +103,7 @@ const handleCloseDetails = () => {
     setWindow(
         statusList.map((item, index) => (
        <ListItem button onClick={() => { handleOpen(item) }} >
-          <ListItemText primary={`${item._id} - ${item.request_date}`} />
+          <ListItemText primary={`${item._id} - ${item.request_date} - ${item.request_status}`} />
         </ListItem>
       ))
     );

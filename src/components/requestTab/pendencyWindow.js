@@ -47,7 +47,7 @@ export default function VirtualizedList() {
         setAlertMessage("Você já possuí uma solicitação de equipamento pendente")
         //setAlertAction(handleCloseAlert);
       }else{
-        await Post(data, userData._id);
+        await Post(data, userData._id,"equipment");
       handleChamado();
       }
     } else {

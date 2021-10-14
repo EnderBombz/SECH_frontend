@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import EquipmentRequests from "./../requestAprovals/equipmentWindow"
+
 function TabPanel(props) {
     
     const { children, value, index, ...other } = props;
@@ -74,7 +76,7 @@ export default function TabsWrappedLabel() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index="one">
-                <h1>Solicitar Equipamento</h1>
+                <EquipmentRequests/>
             </TabPanel>
             <TabPanel value={value} index="two">
             <h1>Manutenção</h1>

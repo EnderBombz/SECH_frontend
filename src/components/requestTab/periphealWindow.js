@@ -21,8 +21,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VirtualizedList() {
   const [loading, setLoading] = useState(true);
-
   const [open, setOpen] = React.useState(false);
+
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState("");
+
 
   const handleOpen = async (data) => {
     try { 
@@ -40,6 +43,22 @@ export default function VirtualizedList() {
     setCurrentData(null);
     setOpen(false);
   };
+
+  const handleOpenAlert = async (data) => {
+    try {
+
+      setOpenAlert(true);
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  };
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
+
+
 
   function renderRow(props) {
     // const { data, index, style } = props;
@@ -86,7 +105,21 @@ export default function VirtualizedList() {
 
   return (
     <>
-      <Modal handleOpen={handleOpen} handleClose={handleClose} open={open} data={currentData}/>
+    <ModalAlert
+        handleOpen={handleOpenAlert}
+        handleClose={handleCloseAlert}
+        open={openAlert}
+        alert={alertMessage}
+        action={handleCloseAlert}
+        />
+      <Modal 
+      handleOpen={handleOpen}
+       handleClose={handleClose} 
+       open={open} 
+       data={currentData}  
+       handleOpenAlert={handleOpenAlert}
+       setAlertMessage={setAlertMessage}
+       />
       <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}</div>
     </>
 

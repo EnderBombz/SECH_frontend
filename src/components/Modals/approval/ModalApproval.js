@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import "./../../css/modal.css";
+import "./../../../css/modal.css";
 import { Button } from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +45,7 @@ export default function TransitionsModal(props) {
                                 <h3>
                                     Chamado: {props.data._id}
                                 </h3>
+                                <h4>Requisitante: {props.data.user_id}</h4>
                                 <div><div className={props.data.request_status}>
                                     <h4>Status: {props.data.request_status}</h4>
                                 </div></div>
@@ -69,22 +70,61 @@ export default function TransitionsModal(props) {
 
 
 
+                                {props.data.request_status === "approved" ?
+                                    <>
+                                        <div className="padding-button">
 
-                                <div>
-                                    {
-                                        props.data.request_status === "pending" ? <><Button
-                                            onClick={() => { props.handleOpenCancel() }}
+                                            <Button
+                                                onClick={() => { props.handleOpenQuestion("Após finalizar o chamado, ele será apagado após o período de 1 mês, deseja continuar?",3) }}
+                                                variant="contained"
+                                                color="primary"
+                                                fullWidth
+                                            >
+                                                Finalizar
+                                            </Button>
+
+                                        </div>
+                                        <div className="padding-button">
+                                            <Button
+                                                onClick={() => { props.handleOpenQuestion("Após cancelar, todos os itens relacionados voltarão ao normal e o chamado será apagado, deseja continuar?",3) }}
+                                                variant="contained"
+                                                color="secondary"
+                                                fullWidth
+                                            >
+                                                Cancelar chamado
+                                            </Button>
+                                        </div>
+                                    </>
+                                    :props.data.request_status==="pending"?  <>
+                                    <div className="padding-button">
+
+                                        <Button
+                                            onClick={() => { props.handleOpenQuestion("Deseja aprovar o chamado solicitado?",1) }}
+                                            variant="contained"
+                                            color="primary"
+                                            fullWidth
+                                        >
+                                            Aprovar
+                                        </Button>
+
+                                    </div>
+                                    <div className="padding-button">
+                                        <Button
+                                            onClick={() => { props.handleOpenQuestion("Realmente deseja recusar o chamado solicitado?",2) }}
                                             variant="contained"
                                             color="secondary"
                                             fullWidth
                                         >
-                                            Cancelar Chamado
-                                        </Button></>
-                                            :
-                                            <></>
-                                    }
+                                            Recusar
+                                        </Button>
+                                    </div>
+                                </>
+                                :
+                                <></>
+                                  
 
-                                </div>
+                                }
+
                             </>
                         ) : (
                             <></>

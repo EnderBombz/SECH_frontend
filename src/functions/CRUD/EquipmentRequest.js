@@ -11,7 +11,7 @@ function dataAtualFormatada() {
 }
 
 
-async function Post(data, user_id) {
+async function Post(data, user_id,type) {
 
     const date = dataAtualFormatada();
     const list = JSON.stringify(data);
@@ -20,6 +20,7 @@ async function Post(data, user_id) {
         equip_list: list,
         user_id: user_id,
         request_date: date.toString(),
+        request_type:type
     }).then((response) => {
         alert("Sucesso ao enviar os dados")
     })

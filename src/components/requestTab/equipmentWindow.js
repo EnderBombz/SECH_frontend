@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core";
 import api from "../../service/api";
 import Modal from "../Modals/ModalSpecs"
+import ModalAlert from "../Modals/messages/ModalAlert"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
 export default function VirtualizedList() {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = React.useState(false);
+
+    const [openAlert, setOpenAlert] = React.useState(false);
+    const [alertMessage, setAlertMessage] = React.useState("");
 
     const handleOpen = async (data) => {
         try {
@@ -37,12 +41,27 @@ export default function VirtualizedList() {
     };
 
 
+    const handleOpenAlert = async (data) => {
+        try {
+    
+          setOpenAlert(true);
+    
+        } catch (err) {
+          console.log(err)
+        }
+    
+      };
+      const handleCloseAlert = () => {
+        setOpenAlert(false);
+      };
+    
 
     const classes = useStyles();
 
     const [computerList, setComputerList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
     const [window, setWindow] = useState();
+    
 
     async function GetItens() {
         const data = await api.get("/werehouse/getFreeComputers").then((response) => {
@@ -72,8 +91,17 @@ export default function VirtualizedList() {
 
     return (
         <>
+        <ModalAlert
+        handleOpen={handleOpenAlert}
+        handleClose={handleCloseAlert}
+        open={openAlert}
+        alert={alertMessage}
+        action={handleCloseAlert}
+        />
             <Modal handleOpen={handleOpen}
                 handleClose={handleClose}
+                handleOpenAlert={handleOpenAlert}
+                setAlertMessage={setAlertMessage}
                 open={open}
                 data={currentData}
             />
