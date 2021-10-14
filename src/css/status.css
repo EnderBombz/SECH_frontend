@@ -1,20 +1,23 @@
 .textAlign-left {
-    text-align: left;
+  text-align: left;
 }
 
 .textAlign-justify {
-    text-align: justify;
+  text-align: justify;
 }
 
 .tabAlignAux {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 80px;
 }
 
 .tabAlign {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
+}
+.textAlign-left {
+  text-align: left;
 }
