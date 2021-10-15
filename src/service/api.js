@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost:5000/" //"https://sech-api.herokuapp.com/" 
+  baseURL: "https://sech-api.herokuapp.com/" //"http://localhost:5000/"
 });
