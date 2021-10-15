@@ -5,6 +5,7 @@ import { ListProvider } from "./../context/ListContext";
 
 import RequestTab from "../components/requestTab/requestTab";
 import MaintanceForm from "../components/MaintanceForm/maintance";
+import DevolutionForm from "../components/DevolutionForm/devolution";
 
 import "../css/chamado.css";
 
@@ -59,7 +60,7 @@ function Chamado() {
                 ) : request === "maintance" ? (
                   <MaintanceForm />
                 ) : (
-                  <h1>Devolution</h1>
+                  <DevolutionForm/>
                 )}
               </div>
             </div>

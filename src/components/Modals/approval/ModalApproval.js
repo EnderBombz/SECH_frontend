@@ -141,7 +141,7 @@ export default function TransitionsModal(props) {
                       onClick={() => {
                         props.handleOpenQuestion(
                           "Após cancelar, todos os itens relacionados voltarão ao normal e o chamado será apagado, deseja continuar?",
-                          3
+                          4
                         );
                       }}
                       variant="contained"

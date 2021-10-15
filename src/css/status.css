@@ -1,23 +1,40 @@
 .textAlign-left {
-  text-align: left;
+    text-align: left;
 }
 
 .textAlign-justify {
-  text-align: justify;
+    text-align: justify;
+}
+
+.textAlign-boxShadow-center {
+    text-align: center;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
 }
 
 .tabAlignAux {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-top: 80px;
 }
 
 .tabAlign {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
+
 .textAlign-left {
-  text-align: left;
+    text-align: left;
+}
+
+.box-equipments {
+    border: 1px solid rgba(0, 0, 0, .3);
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0px 30px 0px;
+    border-radius: 5px;
+}
+
+.equipment-button {
+    margin: 3px;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core";
 import api from "../../service/api";
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VirtualizedList() {
+
 
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = React.useState(false);
@@ -42,12 +43,13 @@ export default function VirtualizedList() {
         setLoading(true)
         const list = currentData.equip_list;
         const list_json = JSON.stringify(list)
+
         await api.put(`/equipment-requests/put/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
             user_id: currentData.user_id,
             request_status: "approved",
-            request_type: currentData.request_type
+            request_type: currentData.request_type,
         })
         handleList();
       
@@ -65,6 +67,17 @@ export default function VirtualizedList() {
         handleCloseQuestion();
         handleClose();
     }
+    const cancelFinishedStatus = async () => {
+
+        let list = currentData.equip_list
+        const equip_list = await JSON.stringify(list)
+        await api.delete(`/equipment-requests/delete/${currentData._id}`);
+    
+        setLoading(true);
+        handleList();
+        handleCloseQuestion();
+        handleClose();
+    }
 
     const finishStatus = async () => {
         handleCloseQuestion();
@@ -72,7 +85,7 @@ export default function VirtualizedList() {
         setLoading(true)
         const list = currentData.equip_list;
         const list_json = JSON.stringify(list)
-        await api.put(`/equipment-requests/put/${currentData._id}`, {
+        await api.put(`/equipment-requests/put-finish/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
             user_id: currentData.user_id,
@@ -149,9 +162,9 @@ export default function VirtualizedList() {
         }
     }
 
-    function handleList() {
+    async function handleList() {
         setWindow(
-            approvalList.map((item, index) => (
+            await approvalList.map((item, index) => (
                 <ListItem button onClick={
                     () => { handleOpen(item) }} >
                     <ListItemText primary={`${item._id} - ${item.request_date} - ${item.request_status}`} />
@@ -176,7 +189,19 @@ export default function VirtualizedList() {
                 handleOpen={handleOpenQuestion}
                 handleClose={handleCloseQuestion}
                 open={openQuestion}
-                action={methodOption===1?updateStatus:methodOption===2?cancelStatus:methodOption===3?finishStatus:<></>}
+                action={methodOption===1?
+                    updateStatus
+                    :
+                    methodOption===2?
+                    cancelStatus
+                    :
+                    methodOption===3?
+                    finishStatus
+                    :methodOption===4?
+                    cancelFinishedStatus
+                    :
+                    <></>
+                }
                 question={questionMessage}
             />
             <Modal handleOpen={handleOpen}
