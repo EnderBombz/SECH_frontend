@@ -67,6 +67,9 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             {props.data ? (
               <>
+              <h1>
+                {props.data.equip_name}
+              </h1>
                 <h3>
                   {props.data.equip_type} ID:{props.data._id}
                 </h3>

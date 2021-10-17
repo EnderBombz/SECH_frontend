@@ -18,7 +18,7 @@ export default function dashboard() {
                         <GraphTab />
                     <div className="spacing">
 
-                 </div>
+                 </div> 
                     </div>     
                 
                 </div>

@@ -66,7 +66,23 @@ export default function TransitionsModal(props) {
                                         </>
                                         : <></>}
                                 </div>
-
+                                {props.data.request_details != "" ?
+                                    <>
+                                        <h4 className="textAlign-left">Motivo</h4>
+                                        <p className="textAlign-justify">{props.data.request_details}</p>
+                                    </>
+                                    :
+                                    <>
+                                    </>
+                                }
+                                {props.data.request_response != null || props.data.request_response != undefined?
+                                    <>
+                                        <h4 className="textAlign-left">Retorno</h4>
+                                        <p className="textAlign-justify">{props.data.request_response}</p>
+                                    </>
+                                    :
+                                    <>
+                                    </>}
 
 
 

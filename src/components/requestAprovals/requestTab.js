@@ -8,6 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 import EquipmentRequests from "./../requestAprovals/equipmentWindow";
+import MaintanceRequests from "./../requestAprovals/maintanceWindow";
+import DevolutionRequests from "./../requestAprovals/devolutionWindow";
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,10 +82,10 @@ export default function TabsWrappedLabel() {
         <EquipmentRequests />
       </TabPanel>
       <TabPanel value={value} index="two">
-        <h1>Manutenção</h1>
+       <MaintanceRequests />
       </TabPanel>
       <TabPanel value={value} index="three">
-        <h1>Devolução</h1>
+      <DevolutionRequests />
       </TabPanel>
     </div>
   );

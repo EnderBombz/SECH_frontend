@@ -23,23 +23,53 @@ import "./../../css/form.css";
 
 const Maintance = () => {
   const { handleHaveRequest } = useContext(Context);
+  const [alertMessage, setAlertMessage] = React.useState("");
+ 
+  const handleMaintanceList = (checklist) => {
+    let i;
+    let cont = 0;
+    let aux_array = [];
+    for (i = 1; i < checked.length; i++) {
+      if(checked[i]!=0){
+        console.log(`yes`)
+          aux_array[cont] = checked[i];
+          cont++;
+      }
+    }
+    return aux_array
+  }
 
-  const sendRequest = async (data) => {
-    if (data.length > 0) {
+  const sendRequest = async () => {
+    console.log(checked)
+    console.log(details)
+    console.log(checked.length)
+    console.log("checked.length > 0?")
+    if (checked.length > 0) {
+      console.log("yes")
       const haveRequestStatus = await handleHaveRequest();
-      console.log(haveRequestStatus);
+
+      //console.log(haveRequestStatus);
+      console.log("have pendent request?")
       if (haveRequestStatus) {
+        console.log("yes")
         handleOpenAlert();
         setAlertMessage(
           "Você já possuí uma solicitação de equipamento pendente"
         );
         //setAlertAction(handleCloseAlert);
       } else {
-        await Post(data, userData._id, "equipment");
+        console.log("no")
+        console.log("starting posting...")
+        //console.log(checked,details)
+        const maintanceList = await handleMaintanceList(checked);
+        
+        await Post(maintanceList, userData._id, "maintance",details);
+        console.log("success to post")
         handleOpenAlert();
         setAlertMessage("Sucesso ao enviar os dados");
       }
     } else {
+      console.log("need to select more than one")
       handleOpenAlert();
       setAlertMessage(
         "É necessário selecionar no mínimo um item para solicitação"
@@ -90,7 +120,6 @@ const Maintance = () => {
 
   const [openQuestion, setOpenQuestion] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
-  const [alertMessage, setAlertMessage] = React.useState("");
   const [details, setDetails] = React.useState("");
 
   const handleOpenDetails = async (data) => {
@@ -134,14 +163,10 @@ const Maintance = () => {
   };
 
   const handleDetails = (msg) => {
-    console.log(msg);
+    //console.log(msg);
     setDetails(msg);
   };
 
-  function sendItens() {
-    sendRequest(checked);
-    handleOpenAlert();
-  }
 
   useEffect(() => {
     updateList();
@@ -153,7 +178,7 @@ const Maintance = () => {
         open={openAlert}
         handleOpen={handleOpenAlert}
         handleClose={handleChamado}
-        alert={"Sucesso ao enviar a solicitação."}
+        alert={alertMessage}
         action={handleChamado}
       />
 
@@ -164,7 +189,7 @@ const Maintance = () => {
         question={
           "Ao confirmar a solicitação, não será possível abrir um novo chamado, até ter algum retorno, Deseja solicitar a manutenção dos equipamentos selecionados?"
         }
-        action={sendItens}
+        action={sendRequest}
       />
 
       <ModalDetails

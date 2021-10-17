@@ -152,7 +152,7 @@ export default function VirtualizedList() {
 
 
     async function GetItens() {
-        const data = await api.get("/equipment-requests/approvals").then((response) => {
+        const data = await api.get("/equipment-requests/equipment/approvals").then((response) => {
             return response.data;
         });
         setApprovalList(data);

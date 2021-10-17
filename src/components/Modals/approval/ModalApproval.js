@@ -48,6 +48,16 @@ export default function TransitionsModal(props) {
                     <h4>Status: {props.data.request_status}</h4>
                   </div>
                 </div>
+                <div>
+                  {props.data.request_details != ""?
+                  <>
+                  <h4 className="textAlign-left">Motivo</h4>
+                  <p className="textAlign-justify">{props.data.request_details}</p>
+                  </>
+                  :
+                  <>
+                  </>}
+                </div>
 
                 <div className="flex-itens">
                   {props.data.equip_list ? (

@@ -120,8 +120,7 @@ export default function VirtualizedList() {
             handleOpen(item);
           }}
         >
-          <ListItemText primary={`${item.equip_class} - ${index + 1}`} />
-        </ListItem>
+<ListItemText primary={`${item.equip_name} - ${item.equip_class}`} />        </ListItem>
       ))
     );
   }

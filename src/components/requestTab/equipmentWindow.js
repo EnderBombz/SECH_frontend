@@ -79,7 +79,7 @@ export default function VirtualizedList() {
             computerList.map((item, index) => (
                 <ListItem button onClick={
                     () => { handleOpen(item) }} >
-                    <ListItemText primary={`${item.equip_class} - ${index + 1}`} />
+                    <ListItemText primary={`${item.equip_name} - ${item.equip_class}`} />
                 </ListItem>
             ))
         );

@@ -93,8 +93,7 @@ export default function VirtualizedList() {
     setWindow(
       periphealsList.map((item, index) => (
         <ListItem button onClick={() => { handleOpen(item) }}>
-          <ListItemText primary={`${item.equip_class} - ${index + 1}`} />
-        </ListItem>
+<ListItemText primary={`${item.equip_name} - ${item.equip_class}`} />        </ListItem>
       ))
     );
   }
