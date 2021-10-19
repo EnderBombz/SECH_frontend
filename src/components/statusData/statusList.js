@@ -10,7 +10,8 @@ import ModalDetails from "../Modals/ModalSpecsDetails"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 400,
+    height: "100%",
+    position:"relative",
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
     marginLeft: "auto",
@@ -139,7 +140,9 @@ const handleCloseDetails = () => {
        handleOpenDetails={handleOpenDetails}
        />
 
-      <div className={classes.root}>{loading ? <h1>Loading...</h1> : window}</div>
+      <div className={classes.root}>
+        {loading ? <h1>Loading...</h1> : window}
+        </div>
     </>
 
   );

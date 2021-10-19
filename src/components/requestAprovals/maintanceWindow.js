@@ -9,13 +9,15 @@ import ModalQuestion from "../Modals/messages/ModalQuestion"
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
-        height: 400,
+        height: "100%",
+        position:"relative",
         maxWidth: 300,
         backgroundColor: theme.palette.background.paper,
         marginLeft: "auto",
         marginRight: "auto"
     }
 }));
+
 
 export default function VirtualizedList() {
 

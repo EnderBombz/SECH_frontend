@@ -24,16 +24,16 @@ import "./../../css/form.css";
 const Devolution = () => {
   const { handleHaveRequest } = useContext(Context);
   const [alertMessage, setAlertMessage] = React.useState("");
- 
+
   const handleDevolutionList = (checklist) => {
     let i;
     let cont = 0;
     let aux_array = [];
     for (i = 1; i < checked.length; i++) {
-      if(checked[i]!=0){
+      if (checked[i] != 0) {
         console.log(`yes`)
-          aux_array[cont] = checked[i];
-          cont++;
+        aux_array[cont] = checked[i];
+        cont++;
       }
     }
     return aux_array
@@ -62,8 +62,8 @@ const Devolution = () => {
         console.log("starting posting...")
         //console.log(checked,details)
         const devolutionList = await handleDevolutionList(checked);
-        
-        await Post(devolutionList, userData._id, "devolution",details);
+
+        await Post(devolutionList, userData._id, "devolution", details);
         console.log("success to post")
         handleOpenAlert();
         setAlertMessage("Sucesso ao enviar os dados");
@@ -153,12 +153,11 @@ const Devolution = () => {
     const data = await api
       .get(`/users/get/${userData._id}`)
       .then((response) => {
-        console.log(response.data);
         return response.data.equipments;
       });
-    setEquipList(data);
     if (data) {
       setLoading(false);
+      setEquipList(data);
     }
   };
 
@@ -198,72 +197,83 @@ const Devolution = () => {
         open={openDetails}
         data={currentItem}
       />
-      <form>
-        <List>
-          {equipList.map((value) => {
-            const labelId = `checkbox-list-label-${value.equip_name}`;
+      {loading ? <></>
+        :
+        equipList.length > 0 ?
+          <>
+            <form>
+              <List>
+                {equipList.map((value) => {
+                  const labelId = `checkbox-list-label-${value.equip_name}`;
 
-            return (
-              <ListItem
-                key={value._id}
-                role={undefined}
-                dense
-                button
-                onClick={handleToggle(value)}
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(value) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  id={labelId}
-                  primary={`${value.equip_name} - ${value.equip_class}`}
+                  return (
+                    <ListItem
+                      key={value._id}
+                      role={undefined}
+                      dense
+                      button
+                      onClick={handleToggle(value)}
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(value) !== -1}
+                          tabIndex={-1}
+                          disableRipple
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        id={labelId}
+                        primary={`${value.equip_name} - ${value.equip_class}`}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          aria-label="comments"
+                          onClick={() => {
+                            handleOpenDetails(value);
+                          }}
+                        >
+                          <InfoIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+
+              <div className="textBox-margin-footer">
+                <TextField
+                  id="outlined-basic"
+                  onChange={(e) => {
+                    handleDetails(e.target.value);
+                  }}
+                  label="Motivo"
+                  multiline
+                  fullWidth
                 />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="comments"
-                    onClick={() => {
-                      handleOpenDetails(value);
-                    }}
-                  >
-                    <InfoIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
+              </div>
+              <div>
+                <Button
+                  onClick={() => {
+                    handleOpenQuestion();
+                  }}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Solicitar
+                </Button>
+              </div>
+            </form>
+          </>
+          :
+          <>
+            <h5>Você não possuí nenhum equipamento</h5>
+          </>
+      }
 
-        <div className="textBox-margin-footer">
-          <TextField
-            id="outlined-basic"
-            onChange={(e) => {
-              handleDetails(e.target.value);
-            }}
-            label="Motivo"
-            multiline
-            fullWidth
-          />
-        </div>
-        <div>
-          <Button
-            onClick={() => {
-              handleOpenQuestion();
-            }}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            Solicitar
-          </Button>
-        </div>
-      </form>
     </>
   );
 };

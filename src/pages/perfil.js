@@ -102,7 +102,7 @@ const handleCloseDetails = () => {
             <h4>{userData.userlevel}</h4>
             <h4>{userData.department}</h4>
           </div>
-          <h2>
+          {equipList.length>0?<> <h2>
             Equipamentos em posse
 
           </h2>
@@ -110,7 +110,8 @@ const handleCloseDetails = () => {
              <List component="nav" aria-label="contacts" className={classes.primary}>
             {loading ? <h1> Loading... </h1> : windowList}
           </List>
-          </div>
+          </div></>:<></>}
+         
          
 
           <Button

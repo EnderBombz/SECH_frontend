@@ -9,6 +9,7 @@ export default function useAuth() {
     const [userData, setUserData] = useState()
     const [haveRequest, setHaveRequest] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [response, setResponse] = useState("");
 
     async function handleHaveRequest() {
         const isRequest = await api.get(`/equipment-requests/have-request/${userData._id}`).then((response) => {
@@ -36,10 +37,15 @@ export default function useAuth() {
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-            setAuthenticated(true);
-            let user_data = parseJwt(token);
-            setUserData(user_data)
+            if (token === "undefined") {
+                handleLogout();
+            } else {
+                api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+                setAuthenticated(true);
+                let user_data = parseJwt(token);
+                setUserData(user_data)
+            }
+
         }
 
         setLoading(false);
@@ -47,13 +53,20 @@ export default function useAuth() {
 
     async function handleLogin(email, password) {
         try {
-            const { data: { token } } = await api.post('/api/auth', { email, password });
-            localStorage.setItem('token', JSON.stringify(token))
-            api.defaults.headers.Authorization = `Bearer ${token}`;
-            setAuthenticated(true);
-            let user_data = parseJwt(token);
-            setUserData(user_data);
-            history.push("/dashboard");
+            const { data: { token, message } } = await api.post('/api/auth', { email, password });
+
+            if (message) {
+                setResponse(message)
+            } else {
+                localStorage.setItem('token', JSON.stringify(token))
+                api.defaults.headers.Authorization = `Bearer ${token}`;
+                setAuthenticated(true);
+                let user_data = parseJwt(token);
+                setUserData(user_data);
+                setResponse("")
+                history.push("/dashboard");
+            }
+
         } catch (err) {
             console.debug(err)
         }
@@ -67,5 +80,5 @@ export default function useAuth() {
         history.push("/login")
     }
 
-    return { authenticated, loading, handleLogin, handleLogout, userData, haveRequest, handleHaveRequest };
+    return { authenticated, loading, handleLogin, handleLogout, userData, haveRequest, handleHaveRequest, response };
 }

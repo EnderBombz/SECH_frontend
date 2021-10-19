@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         marginTop: 20,
         borderRadius: 10,
-        boxShadow: "1px 2px 3px rgba(0,0,0,.3)"
+        boxShadow: "1px 2px 3px rgba(0,0,0,.3)",
+        
     },
 }));
 
@@ -68,7 +69,7 @@ export default function TabsWrappedLabel() {
                     <Tab
                         value="one"
                         label="Ativo"
-                        wrapped     
+                        wrapped      
                         {...a11yProps('one')}
                     />
                  

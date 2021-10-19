@@ -12,7 +12,9 @@ import history from "./../../history/history";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 400,
+    height: "100%",
+    position: "relative",
+    marginBottom:"30px",
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
     marginLeft: "auto",
@@ -120,7 +122,7 @@ export default function VirtualizedList() {
             handleOpen(item);
           }}
         >
-<ListItemText primary={`${item.equip_name} - ${item.equip_class}`} />        </ListItem>
+          <ListItemText primary={`${item.equip_name} - ${item.equip_class}`} />        </ListItem>
       ))
     );
   }
@@ -166,16 +168,19 @@ export default function VirtualizedList() {
       <div className={classes.root}>
         {loading ? <h1>Loading...</h1> : window}
       </div>
-      <Button
-        onClick={() => {
-          sendRequest(list);
-        }}
-        variant="contained"
-        color="primary"
-        fullWidth
-      >
-        Enviar solicitação
-      </Button>
+      {list.length > 0 ?
+        <Button
+          onClick={() => {
+            sendRequest(list);
+          }}
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          Enviar solicitação
+        </Button>:<><h5>Nenhum item selecionado</h5></>
+      }
+
     </>
   );
 }

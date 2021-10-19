@@ -153,7 +153,6 @@ const Maintance = () => {
     const data = await api
       .get(`/users/get/${userData._id}`)
       .then((response) => {
-        console.log(response.data);
         return response.data.equipments;
       });
     setEquipList(data);
@@ -198,72 +197,82 @@ const Maintance = () => {
         open={openDetails}
         data={currentItem}
       />
-      <form>
-        <List>
-          {equipList.map((value) => {
-            const labelId = `checkbox-list-label-${value.equip_name}`;
+    {loading ? <></>
+        :
+        equipList.length > 0 ?
+          <>
+            <form>
+              <List>
+                {equipList.map((value) => {
+                  const labelId = `checkbox-list-label-${value.equip_name}`;
 
-            return (
-              <ListItem
-                key={value._id}
-                role={undefined}
-                dense
-                button
-                onClick={handleToggle(value)}
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(value) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  id={labelId}
-                  primary={`${value.equip_name} - ${value.equip_class}`}
+                  return (
+                    <ListItem
+                      key={value._id}
+                      role={undefined}
+                      dense
+                      button
+                      onClick={handleToggle(value)}
+                    >
+                      <ListItemIcon>
+                        <Checkbox
+                          edge="start"
+                          checked={checked.indexOf(value) !== -1}
+                          tabIndex={-1}
+                          disableRipple
+                          inputProps={{ "aria-labelledby": labelId }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText
+                        id={labelId}
+                        primary={`${value.equip_name} - ${value.equip_class}`}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          aria-label="comments"
+                          onClick={() => {
+                            handleOpenDetails(value);
+                          }}
+                        >
+                          <InfoIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                })}
+              </List>
+
+              <div className="textBox-margin-footer">
+                <TextField
+                  id="outlined-basic"
+                  onChange={(e) => {
+                    handleDetails(e.target.value);
+                  }}
+                  label="Motivo"
+                  multiline
+                  fullWidth
                 />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="comments"
-                    onClick={() => {
-                      handleOpenDetails(value);
-                    }}
-                  >
-                    <InfoIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
-
-        <div className="textBox-margin-footer">
-          <TextField
-            id="outlined-basic"
-            onChange={(e) => {
-              handleDetails(e.target.value);
-            }}
-            label="Motivo"
-            multiline
-            fullWidth
-          />
-        </div>
-        <div>
-          <Button
-            onClick={() => {
-              handleOpenQuestion();
-            }}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            Solicitar
-          </Button>
-        </div>
-      </form>
+              </div>
+              <div>
+                <Button
+                  onClick={() => {
+                    handleOpenQuestion();
+                  }}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Solicitar
+                </Button>
+              </div>
+            </form>
+          </>
+          :
+          <>
+            <h5>Você não possuí nenhum equipamento</h5>
+          </>
+      }
     </>
   );
 };

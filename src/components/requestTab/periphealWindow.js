@@ -11,13 +11,17 @@ import ModalAlert from "../Modals/messages/ModalAlert"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 400,
+    height: "100%",
+    position: "relative",
+    marginBottom:"30px",
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper,
     marginLeft: "auto",
     marginRight: "auto"
   }
 }));
+
+
 
 export default function VirtualizedList() {
   const [loading, setLoading] = useState(true);

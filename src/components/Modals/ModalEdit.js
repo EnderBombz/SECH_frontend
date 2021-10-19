@@ -1,11 +1,11 @@
-import React,{ useContext } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 import "./../../css/modal.css";
-import {ListContext} from "../../context/ListContext"
+import { ListContext } from "../../context/ListContext"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,18 +24,18 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
 
-  const {list,setLoading} = useContext(ListContext);
+  const { list, setLoading } = useContext(ListContext);
 
-  function deletePendencyItemList(){
+  function deletePendencyItemList() {
     setLoading(true);
-    let i=0;
-    for(i=0;i<list.length;i++){
-        if(list[i]._id === props.data._id){
-          list.splice(i,1)
-          window.alert(`${props.data._id} foi removido da lista`)
-          props.handleClose();
-         
-        }
+    let i = 0;
+    for (i = 0; i < list.length; i++) {
+      if (list[i]._id === props.data._id) {
+        list.splice(i, 1)
+        window.alert(`${props.data._id} foi removido da lista`)
+        props.handleClose();
+
+      }
     }
     props.updatePendency();
   }
@@ -59,6 +59,9 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             {props.data ? (
               <>
+                <h1>
+                  {props.data.equip_name}
+                </h1>
                 <h3>
                   {props.data.equip_type} ID:{props.data._id}
                 </h3>
@@ -68,7 +71,7 @@ export default function TransitionsModal(props) {
                 <p> {props.data.equip_details}</p>
                 <div>
                   <Button
-                  onClick={()=>{props.handleOpenQuestion(props.data)}}
+                    onClick={() => { props.handleOpenQuestion(props.data) }}
                     variant="contained"
                     color="primary"
                     style={{
