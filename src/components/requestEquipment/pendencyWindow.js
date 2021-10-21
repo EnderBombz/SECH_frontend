@@ -7,7 +7,7 @@ import ModalAlert from "../Modals/messages/ModalAlert";
 import { ListContext } from "../../context/ListContext";
 import { Context } from "../../context/AuthContext";
 import { Post } from "../../functions/CRUD/EquipmentRequest";
-import history from "./../../history/history";
+import history from "../../history/history";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +48,7 @@ export default function VirtualizedList() {
         );
         //setAlertAction(handleCloseAlert);
       } else {
-        await Post(data, userData._id, "equipment");
+        await Post(data, userData, "equipment");
         handleOpenAlert();
         setAlertMessage("Sucesso ao enviar os dados");
         setAlertAction(1);

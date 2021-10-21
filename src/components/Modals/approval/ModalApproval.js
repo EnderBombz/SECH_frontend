@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
 
+
   return (
     <div>
       <Modal
@@ -39,10 +40,10 @@ export default function TransitionsModal(props) {
       >
         <Fade in={props.open}>
           <div className={classes.paper}>
-            {props.data != undefined ? (
+            {props.data != undefined && props.data != null? (
               <>
                 <h3>Chamado: {props.data._id}</h3>
-                <h4>Requisitante: {props.data.user_id}</h4>
+                <h4>Requisitante: {props.userData.username}</h4>
                 <div>
                   <div className={props.data.request_status}>
                     <h4>Status: {props.data.request_status}</h4>

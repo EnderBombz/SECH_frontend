@@ -10,21 +10,22 @@ function dataAtualFormatada() {
     return diaF + "/" + mesF + "/" + anoF;
 }
 
-async function Post(data, user_id, type, details) {
+async function Post(data, user, type, details) {
 
+    console.log(user);
     const date = dataAtualFormatada();
     const list = JSON.stringify(data);
 
     console.log(details)
     if (details === null || details === undefined) {
         details = "";
-    }
+    } 
 
     await api
         .post("/equipment-requests/post", {
             equip_list: list,
-            user_id: user_id,
             request_date: date.toString(),
+            user_data: user,
             request_type: type,
             request_details: details
         })

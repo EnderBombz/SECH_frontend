@@ -59,7 +59,6 @@ const handleCloseDetails = () => {
   const updateList = async () => {
 
     const data = await api.get(`/users/get/${userData._id}`).then((response) => {
-      console.log(response.data)
       return response.data.equipments
     })
     setEquipList(data);

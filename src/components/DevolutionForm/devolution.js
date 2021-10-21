@@ -63,7 +63,7 @@ const Devolution = () => {
         //console.log(checked,details)
         const devolutionList = await handleDevolutionList(checked);
 
-        await Post(devolutionList, userData._id, "devolution", details);
+        await Post(devolutionList, userData, "devolution", details);
         console.log("success to post")
         handleOpenAlert();
         setAlertMessage("Sucesso ao enviar os dados");

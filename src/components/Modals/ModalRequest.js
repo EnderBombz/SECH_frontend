@@ -45,6 +45,7 @@ export default function TransitionsModal(props) {
                                 <h3>
                                     Chamado: {props.data._id}
                                 </h3>
+                                <h4>Requisitante: {props.userData.username}</h4>
                                 <div><div className={props.data.request_status}>
                                     <h4>Status: {props.data.request_status}</h4>
                                 </div></div>

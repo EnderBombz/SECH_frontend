@@ -1,4 +1,4 @@
-import React,{ useContext } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -42,6 +42,9 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             {props.data ? (
               <>
+                <h1>
+                  {props.data.equip_name}
+                </h1>
                 <h3>
                   {props.data.equip_type} ID:{props.data._id}
                 </h3>
@@ -50,7 +53,7 @@ export default function TransitionsModal(props) {
                 <h4>Detalhes</h4>
                 <p> {props.data.equip_details}</p>
                 <div>
-                  
+
                   <Button
                     onClick={() => {
                       props.handleClose();
@@ -59,7 +62,7 @@ export default function TransitionsModal(props) {
                     color="secondary"
                     fullWidth
                   >
-                   Fechar
+                    Fechar
                   </Button>
                 </div>
               </>

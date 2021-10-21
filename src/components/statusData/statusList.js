@@ -28,13 +28,22 @@ export default function VirtualizedList() {
   const [openDetails, setOpenDetails] = React.useState(false);
   const [openCancel, setOpenCancel] = React.useState(false);
 
+  const classes = useStyles();
+
+  const [statusList, setStatusList] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
+  const [currentItem, setCurrentItem] = useState()
+  const [currentUser,setCurrentUser]=useState({})
+
+  const [window, setWindow] = useState();
+
+
   const handleOpen = async (data) => {
     try {
-      console.log(data);
+   
       let value = data;
-      console.log(value);
       setCurrentData(value);
-      console.log(currentData);
+      setCurrentUser(value.user_data)
       setOpen(true);
 
     } catch (err) {
@@ -66,21 +75,16 @@ const handleCloseDetails = () => {
 };
 
 
-  const classes = useStyles();
-
-  const [statusList, setStatusList] = useState([]);
-  const [currentData, setCurrentData] = useState([]);
-  const [currentItem, setCurrentItem] = useState()
-
-  const [window, setWindow] = useState();
-
   async function RemoveRequest(){
     console.log(currentData);
     console.log(currentData.equip_list);
 
     let list = currentData.equip_list
     const equip_list = await JSON.stringify(list)
-    await api.put(`/werehouse/put-free/${currentData._id}`,{equip_list:equip_list});
+    if(currentData.request_type === "equipment"){
+          await api.put(`/werehouse/put-free/${currentData._id}`,{equip_list:equip_list});
+    }
+
     await api.delete(`/equipment-requests/delete/${currentData._id}`);
 
     setLoading(true);
@@ -137,6 +141,7 @@ const handleCloseDetails = () => {
        handleCloseCancel={handleCloseCancel}  
        open={open} 
        data={currentData} 
+       userData={currentUser}
        handleOpenDetails={handleOpenDetails}
        />
 

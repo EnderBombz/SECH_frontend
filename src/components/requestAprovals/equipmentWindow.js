@@ -34,6 +34,7 @@ export default function VirtualizedList() {
     const [approvalList, setApprovalList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
     const [currentItem, setCurrentItem] = useState([]);
+    const [currentUser,setCurrentUser] = useState({})
     const [window, setWindow] = useState();
 
 
@@ -49,7 +50,7 @@ export default function VirtualizedList() {
         await api.put(`/equipment-requests/put/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
-            user_id: currentData.user_id,
+            user_data: currentData.user_data,
             request_status: "approved",
             request_type: currentData.request_type,
         })
@@ -90,7 +91,7 @@ export default function VirtualizedList() {
         await api.put(`/equipment-requests/put-finish/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
-            user_id: currentData.user_id,
+            user_data: currentData.user_data,
             request_status: "finish",
             request_type: currentData.request_type
         })
@@ -124,6 +125,7 @@ export default function VirtualizedList() {
         try {
             let value = data;
             setCurrentData(value);
+            setCurrentUser(value.user_data);
             setOpen(true);
         } catch (err) {
             console.log(err)
@@ -133,6 +135,7 @@ export default function VirtualizedList() {
 
     const handleClose = () => {
         setCurrentData(null);
+        setCurrentUser(null);
         setOpen(false);
     };
 
@@ -168,7 +171,7 @@ export default function VirtualizedList() {
         setWindow(
             await approvalList.map((item, index) => (
                 <ListItem button onClick={
-                    () => { handleOpen(item) }} >
+                    () => { handleOpen(item)}} >
                     <ListItemText primary={`${item._id} - ${item.request_date} - ${item.request_status}`} />
                 </ListItem>
             ))
@@ -212,6 +215,7 @@ export default function VirtualizedList() {
                 handleOpenQuestion={handleOpenQuestion}
                 open={open}
                 data={currentData}
+                userData={currentUser}
             />
 
             <div className={classes.root}> {loading ? <h1> Loading... </h1> : window}</div>

@@ -34,6 +34,7 @@ export default function VirtualizedList() {
     const [approvalList, setApprovalList] = useState([]);
     const [currentData, setCurrentData] = useState([]);
     const [currentItem, setCurrentItem] = useState([]);
+    const [currentUser,setCurrentUser] = useState({})
     const [window, setWindow] = useState();
 
 
@@ -49,7 +50,7 @@ export default function VirtualizedList() {
         await api.put(`/equipment-requests/put/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
-            user_id: currentData.user_id,
+            user_data: currentData.user_data,
             request_status: "approved",
             request_type: currentData.request_type,
         })
@@ -88,7 +89,7 @@ export default function VirtualizedList() {
         await api.put(`/equipment-requests/put-equipment-maintance/${currentData._id}`, {
             equip_list: list_json,
             request_date: currentData.request_date,
-            user_id: currentData.user_id,
+            user_data: currentData.user_data,
             request_status: "finish",
             request_type: currentData.request_type
         })
@@ -99,13 +100,10 @@ export default function VirtualizedList() {
         try {
             setQuestionMessage(msg)
             setOpenQuestion(true);
-            if (method === 1) {
-                setMethodOption(1)
-            } else if (method === 2) {
-                setMethodOption(2)
-            } else if (method === 3) {
-                setMethodOption(3)
-            } else {
+            console.log(method)
+            if (method !== 0) {
+                setMethodOption(method)
+            }else{
                 setMethodOption(0)
             }
         } catch (err) {
@@ -122,6 +120,7 @@ export default function VirtualizedList() {
         try {
             let value = data;
             setCurrentData(value);
+            setCurrentUser(value.user_data);
             setOpen(true);
         } catch (err) {
             console.log(err)
@@ -189,18 +188,11 @@ export default function VirtualizedList() {
                 handleOpen={handleOpenQuestion}
                 handleClose={handleCloseQuestion}
                 open={openQuestion}
-                action={methodOption===1?
-                    updateStatus
-                    :
-                    methodOption===2?
-                    cancelStatus
-                    :
-                    methodOption===3?
-                    finishStatus
-                    :methodOption===4?
-                    cancelFinishedStatus
-                    :
-                    <></>
+                action={methodOption===1?updateStatus :
+                    methodOption===2?cancelStatus:
+                     methodOption===3? finishStatus:
+                     methodOption===4?cancelFinishedStatus:
+                    ()=>{console.log("metodo não encontrado")}
                 }
                 question={questionMessage}
             />
@@ -210,6 +202,7 @@ export default function VirtualizedList() {
                 handleOpenQuestion={handleOpenQuestion}
                 open={open}
                 data={currentData}
+                userData={currentUser}
             />
 
             <div className={classes.root}> {loading ? <h1> Loading... </h1> : window}</div>

@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
 import { ListProvider } from "./../context/ListContext";
 
-import RequestTab from "../components/requestTab/requestTab";
+import EquipmentTab from "../components/requestEquipment/requestTab";
 import MaintanceForm from "../components/MaintanceForm/maintance";
 import DevolutionForm from "../components/DevolutionForm/devolution";
 
@@ -56,7 +56,7 @@ function Chamado() {
 
               <div>
                 {request === "equipment" ? (
-                  <RequestTab />
+                  <EquipmentTab/>
                 ) : request === "maintance" ? (
                   <MaintanceForm />
                 ) : (

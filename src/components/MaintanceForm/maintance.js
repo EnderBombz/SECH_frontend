@@ -63,7 +63,7 @@ const Maintance = () => {
         //console.log(checked,details)
         const maintanceList = await handleMaintanceList(checked);
         
-        await Post(maintanceList, userData._id, "maintance",details);
+        await Post(maintanceList, userData, "maintance",details);
         console.log("success to post")
         handleOpenAlert();
         setAlertMessage("Sucesso ao enviar os dados");
