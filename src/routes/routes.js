@@ -32,10 +32,10 @@ export default function Routes(){
             <CustomRoute isPrivate exact path="/dashboard" component={Dashboard}/>
             <CustomRoute isPrivate exact path="/chamado" component={Chamado}/>
             <CustomRoute isPrivate exact path="/consultar-status" component={Status}/>
-            <CustomRoute isPrivate exact path="/area-tecnico" component={Tecnico}/>
-            <CustomRoute isPrivate exact path="/aprovacoes" component={Aprovacoes}/>
-            <CustomRoute isPrivate exact path="/estoque" component={Estoque}/>
-            <CustomRoute isPrivate exact path="/usuarios" component={Usuarios}/>
+            <CustomRoute isPrivate isTechnician exact path="/area-tecnico" component={Tecnico}/>
+            <CustomRoute isPrivate isTechnician exact path="/aprovacoes" component={Aprovacoes}/>
+            <CustomRoute isPrivate isTechnician exact path="/estoque" component={Estoque}/>
+            <CustomRoute isPrivate isTechnician exact path="/usuarios" component={Usuarios}/>
         </Switch>
     )
 }
